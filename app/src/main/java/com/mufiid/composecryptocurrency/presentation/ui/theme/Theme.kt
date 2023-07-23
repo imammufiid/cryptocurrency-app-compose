@@ -1,4 +1,4 @@
-package com.mufiid.composecryptocurrency.ui.theme
+package com.mufiid.composecryptocurrency.presentation.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
