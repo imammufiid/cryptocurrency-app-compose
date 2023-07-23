@@ -15,8 +15,8 @@ import javax.inject.Inject
 class CoinListViewModel @Inject constructor(
     private val getCoinsUseCase: GetCoinsUseCase,
 ) : ViewModel() {
-    private val _coinState = mutableStateOf(CoinsState())
-    val coinState: State<CoinsState> = _coinState
+    private val _coinsState = mutableStateOf(CoinsState())
+    val coinsState: State<CoinsState> = _coinsState
 
     init {
         getCoins()
@@ -26,15 +26,15 @@ class CoinListViewModel @Inject constructor(
         getCoinsUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _coinState.value = CoinsState(coins = result.data ?: emptyList())
+                    _coinsState.value = CoinsState(coins = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _coinState.value = CoinsState(
+                    _coinsState.value = CoinsState(
                         error = result.message ?: "An unexpected error occured"
                     )
                 }
                 is Resource.Loading -> {
-                    _coinState.value = CoinsState(isLoading = true)
+                    _coinsState.value = CoinsState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)
